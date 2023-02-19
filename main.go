@@ -13,12 +13,14 @@ import (
 
 func main() {
 
-	app := gin.Default()
-	app.GET("/", func(c *gin.Context) {
-		c.String(http.StatusOK, "Hello World")
+	r := gin.Default()
+	r.GET("/", func(c *gin.Context) {
+		c.JSON(http.StatusOK, gin.H{
+			"message": "Hello world",
+		})
 	})
 
-	go app.Run()
+	go r.Run()
 	bot, err := tg.NewBotAPI("1669588541:AAGRZEulyKI_QVRSf14ada1X2jt3xFA7mbU")
 
 	if err != nil {
