@@ -18,7 +18,7 @@ func main() {
 		c.String(http.StatusOK, "Hello World")
 	})
 
-	go app.Run(":8080")
+	go app.Run()
 	bot, err := tg.NewBotAPI("1669588541:AAGRZEulyKI_QVRSf14ada1X2jt3xFA7mbU")
 
 	if err != nil {
