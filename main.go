@@ -7,10 +7,18 @@ import (
 	"log"
 	"net/http"
 
+	"github.com/gin-gonic/gin"
 	tg "github.com/go-telegram-bot-api/telegram-bot-api"
 )
 
 func main() {
+
+	app := gin.Default()
+	app.GET("/", func(c *gin.Context) {
+		c.String(http.StatusOK, "Hello World")
+	})
+
+	go app.Run(":8080")
 	bot, err := tg.NewBotAPI("1669588541:AAGRZEulyKI_QVRSf14ada1X2jt3xFA7mbU")
 
 	if err != nil {
