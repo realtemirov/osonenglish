@@ -15,15 +15,7 @@ import (
 
 func main() {
 
-	r := gin.Default()
-	r.GET("/", func(c *gin.Context) {
-		c.JSON(http.StatusOK, gin.H{
-			"message": "Hello world",
-		})
-	})
-
-	go r.Run()
-	bot, err := tg.NewBotAPI("1669588541:AAGRZEulyKI_QVRSf14ada1X2jt3xFA7mbU")
+	bot, err := tg.NewBotAPI("<TOKEN>")
 
 	if err != nil {
 		log.Println(err)
@@ -34,6 +26,13 @@ func main() {
 	updateConfig := tg.NewUpdate(0)
 	updateConfig.Timeout = 1
 	updates, err := bot.GetUpdatesChan(updateConfig)
+	r := gin.Default()
+	r.GET("/", func(c *gin.Context) {
+		c.JSON(200, gin.H{
+			"message": "pong",
+		})
+	})
+	go r.Run()
 	if err != nil {
 		log.Println(err)
 		return
@@ -79,14 +78,14 @@ func main() {
 						log.Println(err)
 					}
 				} else {
-					msg := tg.NewMessage(update.Message.Chat.ID, "Defination: Sorry, i can't tranlate this")
+					msg := tg.NewMessage(update.Message.Chat.ID, "Sorry, i can't tranlate this")
 					msg.ParseMode = "markdown"
 					bot.Send(msg)
 				}
 
 				rest := req(bot, update.Message.Text)
 				if rest == nil {
-					msg := tg.NewMessage(update.Message.Chat.ID, "Sorry, i can't find this ")
+					msg := tg.NewMessage(update.Message.Chat.ID, "Defination: Sorry, i can't find this ")
 					msg.ParseMode = "markdown"
 					bot.Send(msg)
 				} else {
