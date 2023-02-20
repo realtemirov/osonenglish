@@ -15,7 +15,7 @@ import (
 
 func main() {
 
-	bot, err := tg.NewBotAPI("<TOKEN>")
+	bot, err := tg.NewBotAPI("1669588541:AAGRZEulyKI_QVRSf14ada1X2jt3xFA7mbU")
 
 	if err != nil {
 		log.Println(err)
