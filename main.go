@@ -15,7 +15,7 @@ import (
 
 func main() {
 
-	bot, err := tg.NewBotAPI("1669588541:AAGRZEulyKI_QVRSf14ada1X2jt3xFA7mbU")
+	bot, err := tg.NewBotAPI("6293373314:AAFVkfHFUowX1FpcRML5frzcAylXEeEMB9I")
 
 	if err != nil {
 		log.Println(err)
@@ -44,6 +44,9 @@ func main() {
 		if update.Message != nil {
 
 			// typing 10 second
+			if update.Message.PinnedMessage != nil {
+				continue
+			}
 
 			bot.Send(tg.ChatActionConfig{
 				BaseChat: tg.BaseChat{
@@ -77,12 +80,13 @@ func main() {
 					if err != nil {
 						log.Println(err)
 					}
-					bot.PinChatMessage(tg.PinChatMessageConfig{
+					bot.Send(tg.PinChatMessageConfig{
 						ChatID:              res.Chat.ID,
 						MessageID:           res.MessageID,
 						DisableNotification: false,
 					})
 				} else {
+
 					msg := tg.NewMessage(update.Message.Chat.ID, "Sorry, i can't tranlate this")
 					msg.ParseMode = "markdown"
 					bot.Send(msg)
