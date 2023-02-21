@@ -60,7 +60,7 @@ func main() {
 			if update.Message.IsCommand() {
 				switch update.Message.Command() {
 				case "start":
-					msg := tg.NewMessage(update.Message.Chat.ID, "Welcome to the bot, send me word and i will give you definition")
+					msg := tg.NewMessage(update.Message.Chat.ID, "Welcome to the bot,  send me word and i will give you definition")
 					msg.ReplyMarkup = tg.NewRemoveKeyboard(true)
 					bot.Send(msg)
 				case "help":
