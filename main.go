@@ -73,10 +73,15 @@ func main() {
 					msg := tg.NewMessage(update.Message.Chat.ID, t)
 					msg.ReplyToMessageID = update.Message.MessageID
 					msg.ParseMode = "markdown"
-					_, err = bot.Send(msg)
+					res, err := bot.Send(msg)
 					if err != nil {
 						log.Println(err)
 					}
+					bot.PinChatMessage(tg.PinChatMessageConfig{
+						ChatID:              res.Chat.ID,
+						MessageID:           res.MessageID,
+						DisableNotification: false,
+					})
 				} else {
 					msg := tg.NewMessage(update.Message.Chat.ID, "Sorry, i can't tranlate this")
 					msg.ParseMode = "markdown"
